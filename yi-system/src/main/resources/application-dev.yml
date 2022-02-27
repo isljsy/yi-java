@@ -1,0 +1,22 @@
+server:
+  port: 21217
+  servlet:
+    # 路径名
+    context-path: /
+spring:
+  application:
+    # 应用名
+    name: /
+  thymeleaf:
+    cache: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dir?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&useTimezone=true&serverTimezone=UTC
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 123456
+linux-path: /usr/local/fileserver/
+windows-path: D:\fileserver\
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ljsy.entity
