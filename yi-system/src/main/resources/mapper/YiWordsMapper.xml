@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ljsy.mapper.YiWordsMapper">
+<mapper namespace="com.ljsy.yisystem.mapper.YiWordsMapper">
 
     <select id="weiningList" resultType="String">select weining from yi_words where weining is not null </select>
     <select id="dafangList" resultType="String">select dafang from yi_words where dafang is not null </select>

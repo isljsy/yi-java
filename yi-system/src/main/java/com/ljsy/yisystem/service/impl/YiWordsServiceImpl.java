@@ -1,13 +1,13 @@
-package com.ljsy.service.impl;
+package com.ljsy.yisystem.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.ljsy.entity.YiWords;
-import com.ljsy.mapper.YiWordsMapper;
-import com.ljsy.service.YiWordsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ljsy.util.PinyinHelper;
+import com.ljsy.yisystem.entity.YiWords;
+import com.ljsy.yisystem.service.YiWordsService;
+import com.ljsy.yisystem.util.PinyinHelper;
+import com.ljsy.yisystem.mapper.YiWordsMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,10 +1,8 @@
-package com.ljsy.service;
+package com.ljsy.yisystem.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ljsy.entity.YiWords;
-
-import java.sql.Blob;
+import com.ljsy.yisystem.entity.YiWords;
 
 /**
  * <p>

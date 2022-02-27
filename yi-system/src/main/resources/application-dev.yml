@@ -19,4 +19,4 @@ linux-path: /usr/local/fileserver/
 windows-path: D:\fileserver\
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.ljsy.entity
+  type-aliases-package: com.ljsy.yisystem.entity

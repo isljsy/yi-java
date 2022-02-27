@@ -1,7 +1,8 @@
-package com.ljsy.mapper;
+package com.ljsy.yisystem.mapper;
 
-import com.ljsy.entity.YiWords;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ljsy.yisystem.entity.YiWords;
 
 import java.util.List;
 

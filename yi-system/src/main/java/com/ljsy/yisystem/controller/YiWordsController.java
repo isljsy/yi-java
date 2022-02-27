@@ -1,12 +1,13 @@
-package com.ljsy.controller;
+package com.ljsy.yisystem.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ljsy.entity.YiWords;
-import com.ljsy.service.YiWordsService;
+import com.ljsy.yisystem.entity.YiWords;
+import com.ljsy.yisystem.service.YiWordsService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,6 +31,7 @@ public class YiWordsController {
 
     @ApiOperation("查询所有彝字")
     @GetMapping("")
+    @PreAuthorize("hasAnyRole('role_admin')")
     public Object list(@RequestParam(value = "searchWord", defaultValue = "") String searchWord,
                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                        @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){

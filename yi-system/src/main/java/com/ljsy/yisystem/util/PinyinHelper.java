@@ -1,8 +1,8 @@
-package com.ljsy.util;
+package com.ljsy.yisystem.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.ljsy.entity.YiWords;
+import com.ljsy.yisystem.entity.YiWords;
 
 import java.util.*;
 

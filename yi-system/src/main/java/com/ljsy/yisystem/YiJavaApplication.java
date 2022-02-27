@@ -1,4 +1,4 @@
-package com.ljsy;
+package com.ljsy.yisystem;
 
 
 import org.springframework.boot.SpringApplication;

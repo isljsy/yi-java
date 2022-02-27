@@ -1,4 +1,4 @@
-package com.ljsy.config;
+package com.ljsy.yisystem.config;
 
 
 
@@ -16,7 +16,7 @@ import java.util.List;
 //Spring boot方式
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.ljsy.mapper")
+@MapperScan("com.ljsy.yisystem.mapper")
 public class MybatisPlusConfig {
 
     /**

@@ -1,4 +1,4 @@
-package com.ljsy.entity;
+package com.ljsy.yisystem.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableName;
