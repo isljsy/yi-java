@@ -16,4 +16,11 @@ public class SysGrantedAuthority implements GrantedAuthority {
         Assert.hasText(role, "角色须有一个角色名！");
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "SysGrantedAuthority{" +
+                "role='" + role + '\'' +
+                '}';
+    }
 }

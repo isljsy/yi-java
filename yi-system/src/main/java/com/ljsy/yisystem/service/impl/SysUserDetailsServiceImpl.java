@@ -51,13 +51,13 @@ public class SysUserDetailsServiceImpl implements UserDetailsService {
         Set<GrantedAuthority> authoritySet = new HashSet<>();
         QueryWrapper<SysRole> roleQueryWrapper = new QueryWrapper<>();
         for(SysUserRole userRole : userRoles){
-            SysRole role = roleMapper.selectOne(roleQueryWrapper.eq("role_id",userRole.getRoleId()));
+            SysRole role = roleMapper.selectOne(roleQueryWrapper.eq("id",userRole.getRoleId()));
             authoritySet.add(new SysGrantedAuthority(role.getRole()));
         }
 
         // 赋值给details对象角色
         userDetails.setAuthorities(authoritySet);
-
+        System.out.println("当前用户"+userDetails);
         return userDetails;
     }
 }
