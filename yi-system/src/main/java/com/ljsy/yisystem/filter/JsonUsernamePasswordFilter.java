@@ -2,6 +2,9 @@ package com.ljsy.yisystem.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.ljsy.yisystem.entity.SysUserDetails;
+import com.ljsy.yisystem.util.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class RestAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JsonUsernamePasswordFilter extends UsernamePasswordAuthenticationFilter {
+
+    private JwtTokenProvider jwtTokenProvider;
+
+    public void setJwtTokenProvider(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -53,6 +62,8 @@ public class RestAuthenticationFilter extends UsernamePasswordAuthenticationFilt
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("utf-8");
-        response.getWriter().println(JSON.toJSONString(authResult));
+        SysUserDetails userDetails = (SysUserDetails) authResult.getPrincipal();
+        String token = jwtTokenProvider.createToken(userDetails.getUsername(),userDetails.getAuthorities());
+        response.getWriter().println("{\"token\":\""+token+"\"}");
     }
 }

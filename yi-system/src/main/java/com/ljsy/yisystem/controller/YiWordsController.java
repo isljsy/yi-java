@@ -31,7 +31,7 @@ public class YiWordsController {
 
     @ApiOperation("查询所有彝字")
     @GetMapping("")
-    @PreAuthorize("hasAnyRole('admin')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public Object list(@RequestParam(value = "searchWord", defaultValue = "") String searchWord,
                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                        @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){

@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/download")
-@PreAuthorize("hasAnyRole('admin')")
+@PreAuthorize("hasAnyRole('ADMIN')")
 public class DownloadController {
 
     @Value("${linux-path}")
