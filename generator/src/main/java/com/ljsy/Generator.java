@@ -10,6 +10,7 @@ public class Generator {
 
     public static void main(String[] args) {
         String basePath = "H:\\yi-java\\yi-system\\src\\main";
+//        String basePath = "";
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/dir?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&useTimezone=true&serverTimezone=UTC",
                         "root", "123456") //数据库连接
                 .globalConfig(builder -> {
@@ -24,7 +25,7 @@ public class Generator {
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, basePath+"\\resources\\mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("dir_word"); // 设置需要生成的表名
+                    builder.addInclude("dir_sentence"); // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
