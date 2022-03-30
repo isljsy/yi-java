@@ -2,4 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ljsy.yisystem.mapper.DirWordMapper">
 
+    <select id="getWordVoById" resultType="com.ljsy.yisystem.entity.WordVo">
+        SELECT w.id   id,
+               w.word word,
+               w.page page,
+               w.count count,
+	w.`code` `code`,
+	r.radical radical
+        FROM
+            dir_word w
+            LEFT JOIN dir_radical r
+        ON w.radical_id = r.id
+where w.id = #{id}
+    </select>
 </mapper>
