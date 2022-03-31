@@ -1,13 +1,19 @@
 package com.ljsy.yisystem.controller;
 
 
-import com.ljsy.yisystem.service.IDirPinyinService;
+import com.ljsy.yisystem.entity.DirLocal;
+import com.ljsy.yisystem.entity.LocalVo;
+import com.ljsy.yisystem.mapper.DirLocalMapper;
+import com.ljsy.yisystem.service.IDirLocalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,17 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author ljsy
- * @since 2022-03-22
+ * @since 2022-03-31
  */
 @RestController
-@RequestMapping("/pinyin")
-public class DirPinyinController {
+@RequestMapping("/local")
+public class DirLocalController {
 
     @Autowired
-    IDirPinyinService pinyinService;
+    IDirLocalService localService;
 
     @GetMapping("")
-    public int splitPinyin(){
-        return pinyinService.splitPinyin();
+    public List<LocalVo> getLocalList(){
+        return localService.getLocalVoList();
     }
 }

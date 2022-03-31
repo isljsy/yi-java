@@ -4,6 +4,8 @@ import com.ljsy.yisystem.entity.DirWord;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ljsy.yisystem.entity.WordVo;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类

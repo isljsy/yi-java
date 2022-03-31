@@ -25,7 +25,7 @@ public class Generator {
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, basePath+"\\resources\\mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("dir_radical"); // 设置需要生成的表名
+                    builder.addInclude("dir_local"); // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
