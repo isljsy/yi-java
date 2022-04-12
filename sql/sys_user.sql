@@ -1,0 +1,2 @@
+INSERT INTO `sys_user` (`id`, `username`, `password`, `create_time`, `last_login_time`, `avatar_path`) VALUES (1, 'ad', '$2a$10$QlRzFZELnTBOy3djH3TYauPuc0lZLB705pA0kQ0yRRp2wOQv8WCqi', '2022-02-27', '2022-02-27', 'ad.png');
+INSERT INTO `sys_user` (`id`, `username`, `password`, `create_time`, `last_login_time`, `avatar_path`) VALUES (2, '张三', '$2a$10$MWnuZ4Cs0p0q49NFXF.SPO67MSqQr6VuWMm/yVsDHCh8TBbrf5RfO', '2022-02-28', '2022-02-28', 'zz.png');

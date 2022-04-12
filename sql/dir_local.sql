@@ -1,0 +1,13 @@
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (1, '威宁', 1);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (2, '大方', 1);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (3, '禄劝', 1);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (4, '毕节', 1);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (5, '盘县', 1);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (6, '隆林', 1);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (7, '红河', 2);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (8, '石屏', 2);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (9, '巍山', 3);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (10, '喜德', 4);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (11, '楚雄', 5);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (12, '永仁', 5);
+INSERT INTO `dir_local` (`id`, `local`, `dialect_id`) VALUES (13, '石林', 6);
