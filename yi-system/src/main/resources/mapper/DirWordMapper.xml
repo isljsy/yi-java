@@ -15,4 +15,16 @@
         ON w.radical_id = r.id
 where w.id = #{id}
     </select>
+    <select id="getWordListBySimplePinyin" resultType="java.lang.String">
+        SELECT
+            w.word
+        FROM
+            dir_pinyin p
+                LEFT JOIN dir_local l ON p.local_id = l.id
+                LEFT JOIN dir_dialect d ON l.dialect_id = d.id
+                left join dir_word w on p.word_id = w.id
+        WHERE
+            d.id = #{dialect}
+          and p.pinyin like concat(#{pinyin},'%')
+    </select>
 </mapper>

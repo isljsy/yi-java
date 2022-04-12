@@ -16,4 +16,11 @@ import java.util.List;
  */
 public interface DirPinyinMapper extends BaseMapper<DirPinyin> {
     List<PinyinVo> getPinyinVoByWordId(Integer wordId);
+
+    /**
+     *
+     * @param dialect 方言大区id
+     * @return 指定方言大区的拼音
+     */
+    List<String> pinyinListByDialect(Integer dialect);
 }

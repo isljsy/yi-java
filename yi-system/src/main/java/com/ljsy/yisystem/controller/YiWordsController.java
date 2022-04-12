@@ -22,8 +22,8 @@ import java.util.Map;
  * @author ljsy
  * @since 2022-01-20
  */
-@RestController
-@RequestMapping("/yi-words")
+//@RestController
+//@RequestMapping("/yi-words")
 public class YiWordsController {
 
     @Resource

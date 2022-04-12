@@ -19,6 +19,7 @@ public class PinyinHelper {
         str = str.replaceAll("[¹²³⁴⁵r].*", "");
         if(str.isBlank()){
             System.out.println("拼音错误:"+pinyin);
+            return null;
         }
         return str;
     }

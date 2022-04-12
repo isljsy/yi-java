@@ -8,7 +8,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -28,7 +31,20 @@ public class DirLocalServiceImpl extends ServiceImpl<DirLocalMapper, DirLocal> i
      * @return 所有地区带方言大区
      */
     @Override
-    public List<LocalVo> getLocalVoList() {
-        return localMapper.getLocalVoList();
+    public Map<String, List<DirLocal>> getLocalVoList() {
+        List<LocalVo> list =  localMapper.getLocalVoList();
+        Map<String, List<DirLocal>> map = new HashMap<>();
+        for(LocalVo localVo: list){
+            DirLocal local = new DirLocal();
+            local.setId(localVo.getId());
+            local.setLocal(localVo.getLocal());
+
+            if(!map.containsKey(localVo.getDialect())){
+                map.put(localVo.getDialect(), new ArrayList<>());
+            }
+
+            map.get(localVo.getDialect()).add(local);
+        }
+        return map;
     }
 }

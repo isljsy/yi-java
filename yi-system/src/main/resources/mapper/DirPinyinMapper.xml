@@ -13,4 +13,11 @@
                  LEFT JOIN dir_dialect d ON l.dialect_id = d.id
         where p.word_id = #{wordId}
     </select>
+
+    <select id="pinyinListByDialect" resultType="String">
+            select p.pinyin from dir_pinyin p
+                LEFT JOIN dir_local l ON p.local_id = l.id
+                LEFT JOIN dir_dialect d ON l.dialect_id = d.id
+            where d.id = #{dialect}
+    </select>
 </mapper>

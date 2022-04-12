@@ -6,6 +6,8 @@ import com.ljsy.yisystem.entity.LocalVo;
 import com.ljsy.yisystem.mapper.DirLocalMapper;
 import com.ljsy.yisystem.service.IDirLocalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +33,7 @@ public class DirLocalController {
     IDirLocalService localService;
 
     @GetMapping("")
-    public List<LocalVo> getLocalList(){
-        return localService.getLocalVoList();
+    public ResponseEntity<Object> getLocalList(){
+        return new ResponseEntity<>(localService.getLocalVoList(), HttpStatus.OK) ;
     }
 }
