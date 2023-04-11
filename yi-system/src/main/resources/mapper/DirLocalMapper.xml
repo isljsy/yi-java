@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ljsy.yisystem.mapper.DirLocalMapper">
-
-    <select id="getLocalVoList" resultType="com.ljsy.yisystem.entity.LocalVo">
-        select l.id,l.local,d.dialect from dir_local l left join dir_dialect d on l.dialect_id = d.id order by l.id;
-    </select>
-</mapper>

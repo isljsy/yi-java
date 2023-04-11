@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ljsy.yisystem.mapper.DirRadicalMapper">
-
-    <select id="getRadicalList" resultType="com.ljsy.yisystem.entity.RadicalVo">
-        select r.id,r.radical,f.first_stroke from dir_radical r left join dir_first_stroke f on r.first_stroke_id = f.id
-    </select>
-</mapper>

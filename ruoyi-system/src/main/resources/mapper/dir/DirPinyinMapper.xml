@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.dir.mapper.DirPinyinMapper">
+    
+    <resultMap type="DirPinyin" id="DirPinyinResult">
+        <result property="id"    column="id"    />
+        <result property="word"    column="word"    />
+        <result property="pinyin"    column="pinyin"    />
+        <result property="local"    column="local"    />
+    </resultMap>
+
+    <sql id="selectDirPinyinVo">
+        select id, word, pinyin, local from dir_pinyin
+    </sql>
+
+    <select id="selectDirPinyinList" parameterType="DirPinyin" resultMap="DirPinyinResult">
+        <include refid="selectDirPinyinVo"/>
+        <where>
+            <if test="word != null  and word != ''"> and word = #{word}</if>
+            <if test="pinyin != null  and pinyin != ''"> and pinyin = #{pinyin}</if>
+            <if test="local != null  and local != ''"> and local = #{local}</if>
+        </where>
+    </select>
+    
+    <select id="selectDirPinyinById" parameterType="Long" resultMap="DirPinyinResult">
+        <include refid="selectDirPinyinVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDirPinyin" parameterType="DirPinyin">
+        insert into dir_pinyin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="word != null">word,</if>
+            <if test="pinyin != null and pinyin != ''">pinyin,</if>
+            <if test="local != null and local != ''">local,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="word != null">#{word},</if>
+            <if test="pinyin != null and pinyin != ''">#{pinyin},</if>
+            <if test="local != null and local != ''">#{local},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDirPinyin" parameterType="DirPinyin">
+        update dir_pinyin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="word != null">word = #{word},</if>
+            <if test="pinyin != null and pinyin != ''">pinyin = #{pinyin},</if>
+            <if test="local != null and local != ''">local = #{local},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDirPinyinById" parameterType="Long">
+        delete from dir_pinyin where id = #{id}
+    </delete>
+
+    <delete id="deleteDirPinyinByIds" parameterType="String">
+        delete from dir_pinyin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

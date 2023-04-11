@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.dir.mapper.DirExplainMapper">
+    
+    <resultMap type="DirExplain" id="DirExplainResult">
+        <result property="id"    column="id"    />
+        <result property="wordId"    column="word_id"    />
+        <result property="hanyu"    column="hanyu"    />
+    </resultMap>
+
+    <resultMap id="DirExplainDirSentenceResult" type="DirExplain" extends="DirExplainResult">
+        <collection property="dirSentenceList" notNullColumn="sub_id" javaType="java.util.List" resultMap="DirSentenceResult" />
+    </resultMap>
+
+    <resultMap type="DirSentence" id="DirSentenceResult">
+        <result property="id"    column="sub_id"    />
+        <result property="explain"    column="sub_explain"    />
+        <result property="sentence"    column="sub_sentence"    />
+        <result property="hanyuSentence"    column="sub_hanyu_sentence"    />
+    </resultMap>
+
+    <sql id="selectDirExplainVo">
+        select id, word_id, hanyu from dir_explain
+    </sql>
+
+    <select id="selectDirExplainList" parameterType="DirExplain" resultMap="DirExplainResult">
+        <include refid="selectDirExplainVo"/>
+        <where>  
+            <if test="wordId != null  and wordId != ''"> and word_id = #{wordId}</if>
+        </where>
+    </select>
+    
+    <select id="selectDirExplainById" parameterType="Long" resultMap="DirExplainDirSentenceResult">
+        select a.id, a.word_id, a.hanyu,
+ b.id as sub_id, b.explain as sub_explain, b.sentence as sub_sentence, b.hanyu_sentence as sub_hanyu_sentence
+        from dir_explain a
+        left join dir_sentence b on b.`explain` = a.id
+        where a.id = #{id}
+    </select>
+        
+    <insert id="insertDirExplain" parameterType="DirExplain" useGeneratedKeys="true" keyProperty="id">
+        insert into dir_explain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wordId != null">word_id,</if>
+            <if test="hanyu != null and hanyu != ''">hanyu,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wordId != null">#{wordId},</if>
+            <if test="hanyu != null and hanyu != ''">#{hanyu},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDirExplain" parameterType="DirExplain">
+        update dir_explain
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="wordId != null">word_id = #{wordId},</if>
+            <if test="hanyu != null and hanyu != ''">hanyu = #{hanyu},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDirExplainById" parameterType="Long">
+        delete from dir_explain where id = #{id}
+    </delete>
+
+    <delete id="deleteDirExplainByIds" parameterType="String">
+        delete from dir_explain where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteDirSentenceByExplains" parameterType="String">
+        delete from dir_sentence where `explain` in
+        <foreach item="explain" collection="array" open="(" separator="," close=")">
+            #{explain}
+        </foreach>
+    </delete>
+
+    <delete id="deleteDirSentenceByExplain" parameterType="Long">
+        delete from dir_sentence where `explain` = #{explain}
+    </delete>
+
+    <insert id="batchDirSentence">
+        insert into dir_sentence( id, `explain`, sentence, hanyu_sentence) values
+		<foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.id}, #{item.explain}, #{item.sentence}, #{item.hanyuSentence})
+        </foreach>
+    </insert>
+</mapper>
