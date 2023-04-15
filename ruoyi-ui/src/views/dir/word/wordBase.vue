@@ -29,12 +29,12 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="彝文" prop="word">
-          <el-input v-model="form.word" placeholder="请输入彝文" />
+          <el-input v-model="form.word" class="yi-font" placeholder="请输入彝文" />
         </el-form-item>
         <el-form-item label="页码" prop="page">
           <el-input v-model="form.page" placeholder="请输入页码" />
         </el-form-item>
-        <el-form-item label="部首" prop="radical">
+        <el-form-item label="部首" class="yi-font" prop="radical">
           <el-select v-model="form.radical" placeholder="请选择部首">
             <el-option
               v-for="dict in dict.type.dir_radical"
