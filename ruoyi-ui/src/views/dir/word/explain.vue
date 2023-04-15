@@ -14,7 +14,7 @@
       </el-col>
     </el-row>
 
-    <el-table v-loading="loading" :data="explainList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="explainList">
       <el-table-column label="汉语释义" align="left" prop="hanyu" />
       <el-table-column label="操作" align="left" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -42,29 +42,31 @@
         <el-form-item label="汉语释义" prop="hanyu">
           <el-input v-model="form.hanyu" placeholder="请输入汉语释义" />
         </el-form-item>
-        <el-divider content-position="left">彝语例句信息</el-divider>
-        <el-row :gutter="10" class="mb8">
-          <el-col :span="1.5">
-            <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAddDirSentence">添加</el-button>
-          </el-col>
-          <el-col :span="1.5">
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDeleteDirSentence">删除</el-button>
-          </el-col>
-        </el-row>
-        <el-table ref="dirSentence" :data="dirSentenceList" :row-class-name="rowDirSentenceIndex" @selection-change="handleDirSentenceSelectionChange">
-          <el-table-column type="selection" width="50" align="left" />
-          <el-table-column label="序号" align="left" prop="index" width="50" />
-          <el-table-column label="彝文例句" align="left" prop="sentence">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.sentence"></el-input>
-            </template>
-          </el-table-column>
-          <el-table-column label="汉语翻译" align="left" prop="hanyuSentence">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.hanyuSentence"></el-input>
-            </template>
-          </el-table-column>
-        </el-table>
+        <div v-if="title!=='添加汉语释义'">
+          <el-divider content-position="left">彝语例句信息</el-divider>
+          <el-row :gutter="10" class="mb8">
+            <el-col :span="1.5">
+              <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAddDirSentence">添加</el-button>
+            </el-col>
+            <el-col :span="1.5">
+              <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDeleteDirSentence">删除</el-button>
+            </el-col>
+          </el-row>
+          <el-table ref="dirSentence" :data="dirSentenceList" :row-class-name="rowDirSentenceIndex" @selection-change="handleDirSentenceSelectionChange">
+            <el-table-column type="selection" width="50" align="left" />
+            <el-table-column label="序号" align="left" prop="index" width="50" />
+            <el-table-column label="彝文例句" align="left" prop="sentence">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.sentence" class="yi-font"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column label="汉语翻译" align="left" prop="hanyuSentence">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.hanyuSentence"></el-input>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -148,25 +150,15 @@ export default {
       this.dirSentenceList = [];
       this.resetForm("form");
     },
-    /** 搜索按钮操作 */
-    handleQuery() {
-      this.queryParams.pageNum = 1;
-      this.getList();
-    },
     /** 重置按钮操作 */
     resetQuery() {
       this.resetForm("queryForm");
       this.handleQuery();
     },
-    // 多选框选中数据
-    handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
-      this.single = selection.length !== 1
-      this.multiple = !selection.length
-    },
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
+      this.form.wordId = this.id;
       this.open = true;
       this.title = "添加汉语释义";
     },
@@ -235,15 +227,9 @@ export default {
         });
       }
     },
-    /** 复选框选中数据 */
+    /** 例句复选框选中数据 */
     handleDirSentenceSelectionChange(selection) {
       this.checkedDirSentence = selection.map(item => item.index)
-    },
-    /** 导出按钮操作 */
-    handleExport() {
-      this.download('system/explain/export', {
-        ...this.queryParams
-      }, `explain_${new Date().getTime()}.xlsx`)
     }
   }
 };

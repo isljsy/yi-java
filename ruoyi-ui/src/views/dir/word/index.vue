@@ -43,27 +43,21 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="释义" prop="params.hanyu">
+        <el-input
+          v-model="queryParams.params.hanyu"
+          placeholder="请输入释义"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
-<!--    <el-row :gutter="10" class="mb8">-->
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
-<!--          v-hasPermi="['system:word:export']"-->
-<!--          type="warning"-->
-<!--          plain-->
-<!--          icon="el-icon-download"-->
-<!--          size="mini"-->
-<!--          @click="handleExport"-->
-<!--        >导出</el-button>-->
-<!--      </el-col>-->
-<!--      <right-toolbar :show-search.sync="showSearch" @queryTable="getList" />-->
-<!--    </el-row>-->
-
-    <el-table v-loading="loading" :data="wordList">
+    <el-table v-loading="loading" :data="wordList" @row-click="handleUpdate">
       <el-table-column label="ID" align="center" prop="id" width="80"/>
       <el-table-column label="彝文" align="center" prop="word" />
       <el-table-column label="页码" align="center" prop="page" />
@@ -74,17 +68,6 @@
       </el-table-column>
       <el-table-column label="笔画" align="center" prop="count" />
       <el-table-column label="字码" align="center" prop="code" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
-          <el-button
-            v-hasPermi="['system:word:edit']"
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-          >修改</el-button>
-        </template>
-      </el-table-column>
     </el-table>
 
     <pagination
@@ -156,7 +139,10 @@ export default {
         page: null,
         radical: null,
         count: null,
-        code: null
+        code: null,
+        params: {
+          hanyu: null
+        }
       },
       // 表单参数
       form: {},
@@ -257,7 +243,4 @@ export default {
 };
 </script>
 <style>
-  input{
-    font-family: "lsty-yi", "Helvetica Neue", sans-serif;
-  }
 </style>
