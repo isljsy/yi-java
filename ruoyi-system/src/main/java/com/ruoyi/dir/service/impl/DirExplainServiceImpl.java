@@ -58,7 +58,6 @@ public class DirExplainServiceImpl implements IDirExplainService
     public int insertDirExplain(DirExplain dirExplain)
     {
         int rows = dirExplainMapper.insertDirExplain(dirExplain);
-        insertDirSentence(dirExplain);
         return rows;
     }
 

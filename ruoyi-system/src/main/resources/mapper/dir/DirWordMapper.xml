@@ -18,14 +18,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectDirWordList" parameterType="DirWord" resultMap="DirWordResult">
-        <include refid="selectDirWordVo"/>
+        select w.id, word, page, radical, count, code from dir_word w left join dir_explain e on w.id = e.word_id
         <where>
-            <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="id != null  and id != ''"> and w.id = #{id}</if>
             <if test="word != null  and word != ''"> and word = #{word}</if>
             <if test="page != null "> and page = #{page}</if>
             <if test="radical != null "> and radical = #{radical}</if>
             <if test="count != null "> and count = #{count}</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="params.hanyu != null  and params.hanyu != ''"> and e.hanyu like concat('%', #{params.hanyu} ,'%')</if>
         </where>
     </select>
     
