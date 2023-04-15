@@ -2,6 +2,7 @@ package com.ruoyi.dir.service;
 
 import java.util.List;
 import com.ruoyi.dir.domain.DirWord;
+import com.ruoyi.dir.domain.dto.DirWordDto;
 
 /**
  * 彝文Service接口
@@ -25,7 +26,7 @@ public interface DirWordService
      * @param dirWord 彝文
      * @return 彝文集合
      */
-    public List<DirWord> selectDirWordList(DirWord dirWord);
+    public List<DirWordDto> selectDirWordList(DirWord dirWord);
 
     /**
      * 新增彝文

@@ -13,12 +13,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="code"    column="code"    />
     </resultMap>
 
+    <resultMap type="DirWordDto" id="DirWordDtoResult">
+        <result property="id"    column="id"    />
+        <result property="word"    column="word"    />
+        <result property="page"    column="page"    />
+        <result property="radical"    column="radical"    />
+        <result property="count"    column="count"    />
+        <result property="code"    column="code"    />
+        <collection property="hanyuList" ofType="java.lang.String" javaType="java.util.List">
+            <result column="hanyu" />
+        </collection>
+    </resultMap>
+
     <sql id="selectDirWordVo">
         select id, word, page, radical, count, code from dir_word
     </sql>
 
-    <select id="selectDirWordList" parameterType="DirWord" resultMap="DirWordResult">
-        select w.id, word, page, radical, count, code from dir_word w left join dir_explain e on w.id = e.word_id
+    <select id="selectDirWordList" parameterType="DirWord" resultMap="DirWordDtoResult">
+        select distinct w.id, word, page, radical, count, code, hanyu from dir_word w left join dir_explain e on w.id = e.word_id
         <where>
             <if test="id != null  and id != ''"> and w.id = #{id}</if>
             <if test="word != null  and word != ''"> and word = #{word}</if>

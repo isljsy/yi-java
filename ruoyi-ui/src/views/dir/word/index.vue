@@ -67,7 +67,8 @@
         </template>
       </el-table-column>
       <el-table-column label="笔画" align="center" prop="count" />
-      <el-table-column label="字码" align="center" prop="code" />
+      <el-table-column label="字码" align="left" prop="code" />
+      <el-table-column label="释义" align="left" prop="hanyuStr"/>
     </el-table>
 
     <pagination
@@ -171,7 +172,10 @@ export default {
     getList() {
       this.loading = true;
       listWord(this.queryParams).then(response => {
-        this.wordList = response.rows;
+        this.wordList = response.rows.map(row => {
+          row.hanyuStr = row.hanyuList.join("/");
+          return row;
+        });
         this.total = response.total;
         this.loading = false;
       });

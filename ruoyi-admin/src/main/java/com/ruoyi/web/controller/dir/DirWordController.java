@@ -3,6 +3,7 @@ package com.ruoyi.web.controller.dir;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.dir.domain.dto.DirWordDto;
 import com.ruoyi.dir.service.DirWordService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,21 +44,8 @@ public class DirWordController extends BaseController
     public TableDataInfo list(DirWord dirWord)
     {
         startPage();
-        List<DirWord> list = dirWordService.selectDirWordList(dirWord);
+        List<DirWordDto> list = dirWordService.selectDirWordList(dirWord);
         return getDataTable(list);
-    }
-
-    /**
-     * 导出彝文列表
-     */
-    @PreAuthorize("@ss.hasPermi('system:word:export')")
-    @Log(title = "彝文", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, DirWord dirWord)
-    {
-        List<DirWord> list = dirWordService.selectDirWordList(dirWord);
-        ExcelUtil<DirWord> util = new ExcelUtil<DirWord>(DirWord.class);
-        util.exportExcel(response, list, "彝文数据");
     }
 
     /**

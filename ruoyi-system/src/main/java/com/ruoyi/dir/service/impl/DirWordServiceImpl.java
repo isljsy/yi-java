@@ -2,6 +2,7 @@ package com.ruoyi.dir.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.dir.domain.dto.DirWordDto;
 import com.ruoyi.dir.service.DirWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class DirWordServiceImpl implements DirWordService
      * @return 彝文
      */
     @Override
-    public List<DirWord> selectDirWordList(DirWord dirWord)
+    public List<DirWordDto> selectDirWordList(DirWord dirWord)
     {
         return dirWordMapper.selectDirWordList(dirWord);
     }
