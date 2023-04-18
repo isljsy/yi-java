@@ -18,7 +18,7 @@
         />
       </el-form-item>
       <el-form-item label="部首" prop="radical">
-        <el-select v-model="queryParams.radical" placeholder="请选择部首" clearable>
+        <el-select v-model="queryParams.radical" class="yi-font" placeholder="请选择部首" clearable>
           <el-option
             v-for="dict in dict.type.dir_radical"
             :key="dict.value"
