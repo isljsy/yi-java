@@ -1,6 +1,11 @@
 <template>
   <div class="dashboard-editor-container">
-
+    <p
+      type="success"
+      :closable="false"
+      style="font-size: 50px !important;"
+    >⁰¹²³⁴⁵⁶⁷⁸⁹
+    </p>
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">

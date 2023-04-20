@@ -1,29 +1,34 @@
 <template>
   <div class="app-container">
     <h1>拼音</h1>
+    <el-row :gutter="10" class="mb8">
+      <el-col :span="1.5">
+        <el-button
+          v-hasPermi="['system:explain:add']"
+          type="primary"
+          plain
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+        >新增</el-button>
+      </el-col>
+    </el-row>
     <el-table v-loading="loading" :data="pinyinList" :row-key="(row)=>{return row.id}">
       <el-table-column label="拼音" align="left" prop="pinyin" />
       <el-table-column label="地区" align="left" prop="local">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.dir_local" :value="scope.row.local"/>
+          <dict-tag :options="dict.type.dir_local" :value="scope.row.local" />
         </template>
       </el-table-column>
       <el-table-column label="操作" align="left" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
+            v-hasPermi="['dir:pinyin:edit']"
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['dir:pinyin:edit']"
           >修改</el-button>
-<!--          <el-button-->
-<!--            size="mini"-->
-<!--            type="text"-->
-<!--            icon="el-icon-delete"-->
-<!--            @click="handleDelete(scope.row)"-->
-<!--            v-hasPermi="['dir:pinyin:remove']"-->
-<!--          >删除</el-button>-->
         </template>
       </el-table-column>
     </el-table>
@@ -41,7 +46,7 @@
               :key="dict.value"
               :label="dict.label"
               :value="dict.value"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
       </el-form>
@@ -158,6 +163,7 @@ export default {
               this.getList();
             });
           } else {
+            this.form.word = this.id;
             addPinyin(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;
