@@ -6,6 +6,7 @@
           v-model="queryParams.word"
           placeholder="请输入彝文"
           clearable
+          class="yi-font"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
