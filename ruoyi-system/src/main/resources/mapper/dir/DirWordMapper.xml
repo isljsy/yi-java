@@ -20,9 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="radical"    column="radical"    />
         <result property="count"    column="count"    />
         <result property="code"    column="code"    />
-        <collection property="hanyuList" ofType="java.lang.String" javaType="java.util.List">
-            <result column="hanyu" />
-        </collection>
+        <result property="hanyu"    column="hanyu"    />
     </resultMap>
 
     <sql id="selectDirWordVo">
@@ -30,7 +28,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectDirWordList" parameterType="DirWord" resultMap="DirWordDtoResult">
-        select distinct w.id, word, page, radical, count, code, hanyu from dir_word w left join dir_explain e on w.id = e.word_id
+        SELECT
+        w.id,
+        w.word,
+        page,
+        radical,
+        count,
+        `code`,
+        hanyu
+        FROM
+        dir_word w
+        LEFT JOIN ( SELECT word_id, GROUP_CONCAT( hanyu ORDER BY id DESC SEPARATOR '/' ) hanyu FROM dir_explain GROUP BY word_id ) e ON w.id = e.word_id
         <where>
             <if test="id != null  and id != ''"> and w.id = #{id}</if>
             <if test="word != null  and word != ''"> and word = #{word}</if>
@@ -39,6 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="count != null "> and count = #{count}</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="params.hanyu != null  and params.hanyu != ''"> and e.hanyu like concat('%', #{params.hanyu} ,'%')</if>
+            <if test="params.pinyin != null and params.pinyin != '' and params.local != null and params.local != ''"> and w.id in (SELECT word FROM dir_pinyin WHERE #{params.local} AND pinyin LIKE concat('%', #{params.pinyin} ,'%'))</if>
+            <if test="params.pinyin != null and params.pinyin != '' and (params.local == null or params.local == '')"> and w.id in (SELECT word FROM dir_pinyin WHERE pinyin LIKE concat('%', #{params.pinyin} ,'%'))</if>
         </where>
     </select>
     

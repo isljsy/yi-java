@@ -2,8 +2,6 @@ package com.ruoyi.dir.domain.dto;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class DirWordDto {
 
@@ -19,5 +17,5 @@ public class DirWordDto {
 
     private String code;
 
-    private List<String> hanyuList;
+    private String hanyu;
 }

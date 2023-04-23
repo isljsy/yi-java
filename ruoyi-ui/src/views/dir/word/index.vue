@@ -52,6 +52,24 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="地区" prop="params.local">
+        <el-select v-model="queryParams.params.local" class="yi-font" placeholder="请选择地区" clearable>
+          <el-option
+            v-for="dict in dict.type.dir_local"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="拼音" prop="params.pinyin">
+        <el-input
+          v-model="queryParams.params.pinyin"
+          placeholder="请输入拼音"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -69,7 +87,7 @@
       </el-table-column>
       <el-table-column label="笔画" align="center" prop="count" />
       <el-table-column label="字码" align="left" prop="code" />
-      <el-table-column label="释义" align="left" prop="hanyuStr"/>
+      <el-table-column label="释义" align="left" prop="hanyu"/>
     </el-table>
 
     <pagination
@@ -112,7 +130,7 @@ import { listWord, addWord, updateWord } from "@/api/dir/word";
 
 export default {
   name: "Word",
-  dicts: ['dir_radical'],
+  dicts: ['dir_radical', 'dir_local'],
   data() {
     return {
       // 遮罩层
@@ -143,7 +161,9 @@ export default {
         count: null,
         code: null,
         params: {
-          hanyu: null
+          hanyu: null,
+          pinyin: null,
+          local: null
         }
       },
       // 表单参数
@@ -151,7 +171,7 @@ export default {
       // 表单校验
       rules: {
         word: [
-          { required: true, message: "彝文不能为空", trigger: "blur"}
+          { required: true, message: "彝文不能为空", trigger: "blur" }
         ],
         radical: [
           { required: true, message: "部首不能为空", trigger: "blur" }
@@ -173,10 +193,7 @@ export default {
     getList() {
       this.loading = true;
       listWord(this.queryParams).then(response => {
-        this.wordList = response.rows.map(row => {
-          row.hanyuStr = row.hanyuList.join("/");
-          return row;
-        });
+        this.wordList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
