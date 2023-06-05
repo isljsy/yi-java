@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="count != null "> and count = #{count}</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="params.hanyu != null  and params.hanyu != ''"> and e.hanyu like concat('%', #{params.hanyu} ,'%')</if>
-            <if test="params.pinyin != null and params.pinyin != '' and params.local != null and params.local != ''"> and w.id in (SELECT word FROM dir_pinyin WHERE #{params.local} AND pinyin LIKE concat('%', #{params.pinyin} ,'%'))</if>
+            <if test="params.pinyin != null and params.pinyin != '' and params.local != null and params.local != ''"> and w.id in (SELECT word FROM dir_pinyin WHERE `local` = #{params.local} AND pinyin LIKE concat('%', #{params.pinyin} ,'%'))</if>
             <if test="params.pinyin != null and params.pinyin != '' and (params.local == null or params.local == '')"> and w.id in (SELECT word FROM dir_pinyin WHERE pinyin LIKE concat(#{params.pinyin} ,'%'))</if>
         </where>
     </select>
