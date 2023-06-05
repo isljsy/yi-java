@@ -76,7 +76,7 @@
       </el-form-item>
     </el-form>
 
-    <el-table v-loading="loading" :data="wordList" @row-click="handleUpdate">
+    <el-table v-loading="loading" :data="wordList" @row-dblclick="handleUpdate">
       <el-table-column label="ID" align="center" prop="id" width="80"/>
       <el-table-column label="彝文" align="center" prop="word" />
       <el-table-column label="页码" align="center" prop="page" />
